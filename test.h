@@ -6,8 +6,13 @@
 
 uint64_t pointer_chasing(uint64_t step, uint64_t iter, size_t size);
 uint64_t iteration(uint64_t step, uint64_t iter, size_t size);
+uint64_t branch_prediction(uint64_t step, uint64_t iter, size_t size);
 
 #define ENABLE_PROFILE 0
+
+#define K(n) (((uint64_t)n)<<10)
+#define M(n) (((uint64_t)n)<<20)
+#define G(n) (((uint64_t)n)<<30)
 
 #define PROFILE(func, filename)                                                \
     do {                                                                       \
