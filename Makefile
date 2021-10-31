@@ -3,7 +3,9 @@ CFLAGS		:= -g3
 LDFLAGS		:= -lprofiler
 LIBS		:= test.c
 
-all: main
+all: build/main
 
-main: main.c $(LIBS)
+build/main: main.c $(LIBS)
 	$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $@ 
+
+$(shell mkdir -p build)
