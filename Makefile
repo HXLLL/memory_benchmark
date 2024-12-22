@@ -1,6 +1,6 @@
 CC 			:= gcc
 CFLAGS		:= -g3
-LDFLAGS		:= -lprofiler
+# LDFLAGS		:= -lprofiler
 LIBS		:= test.c
 
 all: build/main

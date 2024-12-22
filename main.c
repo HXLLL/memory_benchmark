@@ -19,8 +19,9 @@ void test_pointer_chasing(uint64_t step, uint64_t iter, uint64_t size) {
 }
 
 int main() {
-    int iter = 1e8, step = 1e5+7;
-    size_t l1_test_size=K(8), l2_test_size=K(256),l3_test_size=M(4), dram_test_size=G(1);
+    int iter = 1e9, step = 1e6+7;
+    size_t l1_test_size=K(512), l2_test_size=M(8), l3_test_size=M(16), l3_2_test_size=M(32), dram_test_size=G(4);
+    size_t l1_step=K(8) + 31, l2_step=(1), l3_step=M(1), l3_2_step=M(1), dram_step=M(1);
 
     // l1 random access
     printf("l1 cache random access\n");
@@ -37,32 +38,36 @@ int main() {
     test_random_access(step, iter, l3_test_size);
     printf("\n");
 
-    // // dram random access
-    // printf("dram random access\n");
-    // test_random_access(step, iter, dram_test_size);
+    // l3-2 random access
+    printf("l3-2 cache random access\n");
+    test_random_access(step, iter, l3_2_test_size);
+    printf("\n");
+
+    // dram random access
+    printf("dram random access\n");
+    test_random_access(step, iter, dram_test_size);
+    printf("\n");
+
+
+    // // l1 branch prediction
+    // printf("l1 cache branch prediction\n");
+    // test_branch_prediction(step, iter, l1_test_size);
     // printf("\n");
 
+    // // l2 branch prediction
+    // printf("l2 cache branch prediction\n");
+    // test_branch_prediction(step, iter, l2_test_size);
+    // printf("\n");
 
-    // l1 branch prediction
-    printf("l1 cache branch prediction\n");
-    test_branch_prediction(step, iter, l1_test_size);
-    printf("\n");
-
-    // l2 branch prediction
-    printf("l2 cache branch prediction\n");
-    test_branch_prediction(step, iter, l2_test_size);
-    printf("\n");
-
-    // l3 branch prediction
-    printf("l3 cache branch prediction\n");
-    test_branch_prediction(step, iter, l3_test_size);
-    printf("\n");
+    // // l3 branch prediction
+    // printf("l3 cache branch prediction\n");
+    // test_branch_prediction(step, iter, l3_test_size);
+    // printf("\n");
 
     // // dram branch prediction
     // printf("dram branch prediction\n");
     // test_branch_prediction(step, iter, dram_test_size);
     // printf("\n");
-
 
     // l1 pointer chasing
     printf("l1 cache pointer chasing\n");
@@ -79,9 +84,13 @@ int main() {
     test_pointer_chasing(step, iter, l3_test_size);
     printf("\n");
 
-    // // dram pointer chasing
-    // printf("dram pointer chasing\n");
-    // test_pointer_chasing(step, iter, dram_test_size);
-    // printf("\n");
+    // l3-2 pointer chasing
+    printf("l3-2 cache pointer chasing\n");
+    test_pointer_chasing(step, iter, l3_2_test_size);
+    printf("\n");
 
+    // dram pointer chasing
+    printf("dram pointer chasing\n");
+    test_pointer_chasing(step, iter, dram_test_size);
+    printf("\n");
 }
